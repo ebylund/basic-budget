@@ -1,0 +1,51 @@
+#add-transaction {
+    margin: 0;
+}
+
+#container {
+    max-width: 900px;
+    margin: 0 auto;
+    /*background-color: #ccc;*/
+}
+
+#trans-date-input {
+    box-shadow: none;
+    border: none;
+}
+
+.item:nth-child(1) {
+    width: 160px;
+}
+
+.item:nth-child(2) {
+    width: 500px;
+}
+
+.item:nth-child(3) {
+    width: 90px;
+}
+
+.item:nth-child(4) {
+
+}
+
+.trans-input {
+    height: 40px;
+    border: none;
+}
+
+.item {
+    display: inline-block;
+    height: 35px;
+    border-right: 1px solid #aaa;
+    line-height: 35px;
+    padding: 0 5px;
+}
+
+.item:last-child {
+    border-right: none;
+}
+
+.transaction {
+    border-bottom: 2px solid #aaa;
+}
