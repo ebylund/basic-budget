@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Budget App</title>
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div id="container">
+	<div id="transaction-input-fields">
+		<input type="date" class="item trans-input" id="trans-date-input" name="trans-date" placeholder="date" value="2019-06-19">
+		<input type="text" class="item trans-input" id="trans-description-input" name="trans-description" placeholder="description" value="Frei's Fruit Market">
+		<input type="number" step=".01" class="item trans-input" id="trans-amount-input" name="trans-amount" placeholder="amount" value="29.52">
+		<select type="text" class="item trans-input" id="trans-category-input" name="trans-category">
+			<option value="Groceries">Groceries</option>
+			<option value="Shopping">Shopping</option>
+			<option value="Treats">Treats</option>
+			<option value="Auto">Auto</option>
+			<option value="Home">Home</option>
+		</select>
+		<button id="add-transaction" onclick="addTransaction()" class="btn btn-primary">+</button>
+	</div>
+	<div id="transactions-container">
+
+		<!--			<div class="transaction">-->
+		<!--				<div class="item">2019-05-12</div>-->
+		<!--				<div class="item">Frei's Fruit Market</div>-->
+		<!--				<div class="item">-$2.94</div>-->
+		<!--				<div class="item">Groceries</div>-->
+		<!--			</div>-->
+
+	</div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
