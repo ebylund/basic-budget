@@ -24,7 +24,10 @@ function fetchInputValues() {
 function createDomTransaction(t) {
     var newTransactionRow = document.createElement("div");
     newTransactionRow.className = "transaction";
-
+    newTransactionRow.setAttribute("data-id", t.id);
+    newTransactionRow.setAttribute("data-created-on", t.createdOn);
+    t.date = new Date(t.date).toLocaleDateString();
+    t.amount = `-$${t.amount.toFixed(2)}`;
     [t.date, t.description, t.amount, t.category].forEach(item => {
         var newItem = document.createElement("div");
         newItem.classList.add("item");
@@ -42,7 +45,7 @@ function removeDisplayedTransactions() {
     }
 }
 
-function reDisplayTransactions() {
+function refreshTransactions() {
     removeDisplayedTransactions();
     var transactionContainer = document.getElementById("transactions-container");
     transactionList.forEach(transaction => {
@@ -57,12 +60,45 @@ function addTransaction() {
     // TODO: validate fields
     validateFields();
 
-    addTransactionToList({
+    postTransaction({
         date: inputValues.inputDate.value,
         description: inputValues.inputDescription.value,
         amount: inputValues.inputAmount.value,
         category: inputValues.inputCategory.value
     });
-
-    reDisplayTransactions();
 }
+
+function fetchTransactions() {
+    return fetch("http://localhost:5225/transactions")
+        .then(function (response) {
+            return response.json();
+        })
+}
+
+function fetchTransactionsAndPopulateList() {
+    return fetchTransactions()
+        .then(function(transactions) {
+            transactionList = transactions;
+        })
+}
+
+function postTransaction(transaction) {
+    console.log(transaction);
+    fetch("http://localhost:5225/transactions", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(transaction)
+    }).then(function () {
+        fetchTransactionsAndPopulateList()
+            .then(function() {
+                refreshTransactions();
+            });
+    })
+}
+
+fetchTransactionsAndPopulateList()
+    .then(function() {
+        refreshTransactions();
+    });

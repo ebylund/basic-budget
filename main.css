@@ -1,3 +1,7 @@
+:root {
+    --border-color: #ddd;
+}
+
 #add-transaction {
     margin: 0;
 }
@@ -37,7 +41,7 @@
 .item {
     display: inline-block;
     height: 35px;
-    border-right: 1px solid #aaa;
+    border-right: 1px solid var(--border-color);
     line-height: 35px;
     padding: 0 5px;
 }
@@ -47,5 +51,5 @@
 }
 
 .transaction {
-    border-bottom: 2px solid #aaa;
+    border-bottom: 1px solid var(--border-color);
 }
