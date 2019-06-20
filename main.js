@@ -1,11 +1,17 @@
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: "USD",
+    minimumFractionDigits: 2
+});
+
 var transactionList = [];
 
-function addTransactionToList(transaction) {
-    transactionList.unshift(transaction);
-}
-
 function validateFields() {
-
+    var v = fetchInputValues();
+    return v.inputDate.value !== "" &&
+        v.inputDescription.value !== "" &&
+        v.inputCategory.value !== "" &&
+        v.inputAmount.value !== ""
 }
 
 function resetFields() {
@@ -21,21 +27,21 @@ function fetchInputValues() {
     };
 }
 
-function createDomTransaction(t) {
-    var newTransactionRow = document.createElement("div");
-    newTransactionRow.className = "transaction";
-    newTransactionRow.setAttribute("data-id", t.id);
-    newTransactionRow.setAttribute("data-created-on", t.createdOn);
-    t.date = new Date(t.date).toLocaleDateString();
-    t.amount = `-$${t.amount.toFixed(2)}`;
-    [t.date, t.description, t.amount, t.category].forEach(item => {
-        var newItem = document.createElement("div");
-        newItem.classList.add("item");
-        newItem.innerText = item;
-        newTransactionRow.appendChild(newItem);
-    });
+function createTransactionFromTemplate(t) {
+    var newTransaction = document
+        .getElementById("transaction-template")
+        .content
+        .cloneNode(true)
+        .querySelector(".transaction");
 
-    return newTransactionRow
+    newTransaction.setAttribute("data-id", t.id);
+    newTransaction.setAttribute("data-created-on", t.createdOn);
+    newTransaction.querySelector(".trans-date").innerText = new Date(t.date).toLocaleDateString();
+    newTransaction.querySelector(".trans-description").innerText = t.description;
+    newTransaction.querySelector(".trans-category").innerText = t.category;
+    newTransaction.querySelector(".trans-amount").innerText = "-" + formatter.format(t.amount);
+
+    return newTransaction;
 }
 
 function removeDisplayedTransactions() {
@@ -49,22 +55,25 @@ function refreshTransactions() {
     removeDisplayedTransactions();
     var transactionContainer = document.getElementById("transactions-container");
     transactionList.forEach(transaction => {
-        var newTransactionRow = createDomTransaction(transaction);
-        transactionContainer.appendChild(newTransactionRow);
+        var newTransaction = createTransactionFromTemplate(transaction);
+        transactionContainer.appendChild(newTransaction);
     });
 }
 
 function addTransaction() {
     var inputValues = fetchInputValues();
-
-    // TODO: validate fields
-    validateFields();
-
+    Object.values(inputValues).forEach(input => input.classList.remove("input-error"));
+    if (!validateFields()) {
+        var inputs = Object.values(inputValues);
+        var invalidInputs = inputs.filter(input => input.value === "");
+        invalidInputs.forEach(input => input.classList.add("input-error"));
+        return;
+    }
     postTransaction({
         date: inputValues.inputDate.value,
         description: inputValues.inputDescription.value,
-        amount: inputValues.inputAmount.value,
-        category: inputValues.inputCategory.value
+        category: inputValues.inputCategory.value,
+        amount: inputValues.inputAmount.value
     });
 }
 
@@ -83,7 +92,6 @@ function fetchTransactionsAndPopulateList() {
 }
 
 function postTransaction(transaction) {
-    console.log(transaction);
     fetch("http://localhost:5225/transactions", {
         method: "POST",
         headers: {
