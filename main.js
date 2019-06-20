@@ -27,6 +27,16 @@ function fetchInputValues() {
     };
 }
 
+function updateTransaction(event) {
+    console.log("update clicked!");
+    console.log(event.target.parentNode.parentNode.parentNode);
+}
+
+function destroyTransaction(event) {
+    console.log("destroy clicked!");
+    console.log(event.target.parentNode.parentNode.parentNode);
+}
+
 function createTransactionFromTemplate(t) {
     var newTransaction = document
         .getElementById("transaction-template")
@@ -40,6 +50,8 @@ function createTransactionFromTemplate(t) {
     newTransaction.querySelector(".trans-description").innerText = t.description;
     newTransaction.querySelector(".trans-category").innerText = t.category;
     newTransaction.querySelector(".trans-amount").innerText = "-" + formatter.format(t.amount);
+    newTransaction.querySelector("#update").addEventListener("click", updateTransaction);
+    newTransaction.querySelector("#destroy").addEventListener("click", destroyTransaction);
 
     return newTransaction;
 }
