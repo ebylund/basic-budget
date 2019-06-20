@@ -27,14 +27,31 @@ function fetchInputValues() {
     };
 }
 
-function updateTransaction(event) {
-    console.log("update clicked!");
-    console.log(event.target.parentNode.parentNode.parentNode);
+function updateTransactionHandler(event) {
+    var transNode = event.target.parentNode.parentNode.parentNode;
+    var trans = {
+        date: transNode.querySelector('.trans-date').innerText,
+        description: transNode.querySelector('.trans-description').innerText,
+        category: transNode.querySelector('.trans-category').innerText,
+        amount: transNode.querySelector('.trans-amount').innerText,
+    };
+    destroyTransaction(transNode.getAttribute("data-id"))
+        .then(function () {
+            var inputValues = fetchInputValues();
+            inputValues.inputDate.value = new Date(trans.date);
+            inputValues.inputDescription.value = trans.description;
+            inputValues.inputCategory.value = trans.category;
+            inputValues.inputAmount.value = trans.amount.replace(/[^0-9.]+/g,"");
+        })
 }
 
-function destroyTransaction(event) {
-    console.log("destroy clicked!");
-    console.log(event.target.parentNode.parentNode.parentNode);
+function destroyTransactionHandler(event) {
+    var dataId = event.target.parentNode.parentNode.parentNode.getAttribute("data-id");
+    destroyTransaction(dataId)
+        .then(function () {
+            console.log("destroyed!")
+        })
+
 }
 
 function createTransactionFromTemplate(t) {
@@ -50,8 +67,8 @@ function createTransactionFromTemplate(t) {
     newTransaction.querySelector(".trans-description").innerText = t.description;
     newTransaction.querySelector(".trans-category").innerText = t.category;
     newTransaction.querySelector(".trans-amount").innerText = "-" + formatter.format(t.amount);
-    newTransaction.querySelector("#update").addEventListener("click", updateTransaction);
-    newTransaction.querySelector("#destroy").addEventListener("click", destroyTransaction);
+    newTransaction.querySelector("#update").addEventListener("click", updateTransactionHandler);
+    newTransaction.querySelector("#destroy").addEventListener("click", destroyTransactionHandler);
 
     return newTransaction;
 }
@@ -116,6 +133,18 @@ function postTransaction(transaction) {
                 refreshTransactions();
             });
     })
+}
+
+function destroyTransaction(id) {
+    return fetch(`http://localhost:5225/transactions/${id}`, {method: "DELETE"})
+        .then(function () {
+            fetchTransactionsAndPopulateList()
+                .then(function() {
+                    refreshTransactions();
+                    return true;
+                });
+            return true;
+        })
 }
 
 fetchTransactionsAndPopulateList()
