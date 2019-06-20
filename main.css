@@ -2,40 +2,68 @@
     --border-color: #ddd;
 }
 
-#add-transaction {
-    margin: 0;
-}
-
 #container {
     max-width: 900px;
     margin: 0 auto;
-    /*background-color: #ccc;*/
 }
 
-#trans-date-input {
-    box-shadow: none;
-    border: none;
-}
+/* Start of main input css */
 
-.item:nth-child(1) {
-    width: 160px;
-}
-
-.item:nth-child(2) {
-    width: 500px;
-}
-
-.item:nth-child(3) {
-    width: 90px;
-}
-
-.item:nth-child(4) {
-
+.input-error {
+    background-color: #FFF0F4;
+    border: 1px solid #C31846 !important;
 }
 
 .trans-input {
     height: 40px;
     border: none;
+}
+
+#transaction-input-fields {
+    height: 100px;
+    padding: 30px 10px;
+    background-color: #ddd;
+}
+
+#trans-date-input {
+    box-shadow: none;
+    width: 160px;
+    /*border: none;*/
+}
+
+#trans-description-input {
+    width: 420px;
+}
+
+#trans-amount-input {
+    width: 120px;
+}
+
+#trans-category-input {
+
+}
+
+#add-transaction {
+    margin: 0;
+}
+
+/* End of main input css */
+
+.trans-date {
+    width: 160px;
+}
+
+.trans-description {
+    width: 420px;
+}
+
+.trans-category {
+    width: 110px;
+}
+
+.trans-amount {
+    width: 110px;
+    text-align: right;
 }
 
 .item {
