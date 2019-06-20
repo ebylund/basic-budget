@@ -18,13 +18,16 @@
 		<div class="item trans-category"></div>
 		<div class="item trans-amount"></div>
         <div class="item trans-icons">
-			<div class="icon"><img src="resources/pencil.svg" alt="pencil"></div>
-			<div class="icon"><img src="resources/trash.svg" alt="pencil"></div>
+			<div id="update" class="icon"><img id="pencil" src="resources/pencil-blue.svg" alt="pencil"></div>
+			<div id="destroy" class="icon"><img id="trash" src="resources/trash-red.svg" alt="pencil"></div>
 		</div>
 	</div>
 </template>
 
 <div id="container">
+	<div id="title">
+		<h2>Budget Tracker™</h2>
+	</div>
 	<div id="transaction-input-fields">
 		<input type="date" class="trans-input" id="trans-date-input" name="trans-date" placeholder="date" value="2019-06-19">
 		<input type="text" class="trans-input" id="trans-description-input" name="trans-description" placeholder="description" value="Frei's Fruit Market">
@@ -37,6 +40,13 @@
 			<option value="Home">Home</option>
 		</select>
 		<button id="add-transaction" onclick="addTransaction()" class="btn btn-primary">+</button>
+	</div>
+    <div id="transactions-header">
+		<div class="header" id="header-date">Date</div>
+		<div class="header" id="header-description">Description</div>
+		<div class="header" id="header-category">Category</div>
+		<div class="header" id="header-amount">Amount</div>
+		<div class="header" id="header-icons">Actions</div>
 	</div>
 	<div id="transactions-container"></div>
 </div>
