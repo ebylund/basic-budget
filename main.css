@@ -21,37 +21,37 @@
 /* Start of main input css */
 /***************************/
 
-.input-error {
+#transaction-input-fields {
+    height: 60px;
+    padding: 10px;
+}
+
+#transaction-input-fields .input-error {
     background-color: #FFF0F4;
     border: 1px solid #C31846 !important;
 }
 
-.trans-input {
+#transaction-input-fields .trans-input {
     height: 40px;
     border: none;
     background-color: #EFEFEF;
     padding: 0 7px;
 }
 
-#transaction-input-fields {
-    height: 60px;
-    padding: 10px;
-}
-
-#trans-date-input {
+#transaction-input-fields #trans-date-input {
     box-shadow: none;
     width: 160px;
 }
 
-#trans-description-input {
+#transaction-input-fields #trans-description-input {
     width: 420px;
 }
 
-#trans-amount-input {
+#transaction-input-fields #trans-amount-input {
     width: 120px;
 }
 
-#trans-category-input {
+#transaction-input-fields #trans-category-input {
     position: relative;
     top: -1px;
     -webkit-border-radius: 0;
@@ -59,7 +59,7 @@
     border-radius: 0;
 }
 
-#add-transaction {
+#transaction-input-fields #add-transaction {
     position: relative;
     top: -2px;
     margin: 0;
