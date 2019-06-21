@@ -17,7 +17,9 @@
     margin: 0 auto;
 }
 
+/***************************/
 /* Start of main input css */
+/***************************/
 
 .input-error {
     background-color: #FFF0F4;
@@ -34,7 +36,6 @@
 #transaction-input-fields {
     height: 60px;
     padding: 10px;
-    /*background-color: #ddd;*/
 }
 
 #trans-date-input {
@@ -64,7 +65,14 @@
     margin: 0;
 }
 
+/*************************/
 /* End of main input css */
+/*************************/
+
+/********************/
+/* Start header css */
+/********************/
+
 #transactions-header {
     border-bottom: 1px solid var(--border-color);
     height: 40px;
@@ -77,6 +85,27 @@
     font-style: italic;
     margin: 0;
     padding: 0 7px;
+}
+
+.header:hover {
+    background-color: #EFEFEF;
+}
+
+.header > img {
+    display: none;
+}
+
+.header > .direction-desc {
+    display: inline-block !important;
+}
+
+.header > .direction-asc {
+    display: inline-block !important;
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 #header-date {
@@ -99,39 +128,47 @@
     width: var(--icons-width);
 }
 
-.trans-date {
+/******************/
+/* End header css */
+/******************/
+
+/************************/
+/* Start transaction css*/
+/************************/
+
+.transaction .trans-date {
     width: 15%;
 }
 
-.trans-description {
+.transaction .trans-description {
     width: 45%;
 }
 
-.trans-category {
+.transaction .trans-category {
     width: 15%;
 }
 
-.trans-amount {
+.transaction .trans-amount {
     width: 12%;
     text-align: right;
 }
 
-.trans-icons {
+.transaction .trans-icons {
     width: 10%;
 }
 
-.icon {
+.transaction .icon {
     display: inline-block;
     width: 45%;
 }
 
-.icon > img {
+.transaction .icon  img {
     width: 14px;
     display: block;
     margin: auto;
 }
 
-.item {
+.transaction .item {
     display: inline-block;
     height: 35px;
     border-right: 1px solid var(--border-color);
@@ -139,7 +176,7 @@
     padding: 0 12px;
 }
 
-.item:last-child {
+.transaction .item:last-child {
     border-right: none;
 }
 
@@ -148,6 +185,10 @@
     border-bottom: 1px solid var(--border-color);
     border-left: 1px solid var(--border-color);
 }
+
+/**********************/
+/* End transaction css*/
+/**********************/
 
 .fileUpload {
     position: relative;
@@ -165,21 +206,4 @@
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
-}
-
-.header > img {
-    display: none;
-}
-
-.direction-desc {
-    display: inline-block !important;
-}
-
-.direction-asc {
-    display: inline-block !important;
-    -webkit-transform:rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
 }

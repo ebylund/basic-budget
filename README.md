@@ -14,3 +14,7 @@ clone and run the [basic-budget-api](https://github.com/ebylund/basic-budget-api
   - Form validation
   - API Backed
   
+## Additional Notes
+  - If you  like to test the Bulk Import feature, a sample transaction file can be found at `/resouces/transactions.csv`
+  
+  
