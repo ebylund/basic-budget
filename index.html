@@ -49,10 +49,10 @@
 	</div>
 
 	<div id="transactions-header">
-		<div class="header" id="header-date">Date</div>
-		<div class="header" id="header-description">Description <img class="" data-direction="off" src="resources/caret-bottom.svg" alt="pencil"></div>
-		<div class="header" id="header-category">Category</div>
-		<div class="header" id="header-amount">Amount <img class="" data-direction="off" src="resources/caret-bottom.svg" alt="pencil"></div>
+		<div class="header" id="header-date">Date <img class="direction-desc" data-direction="desc" src="resources/caret-bottom.svg" alt="caret"></div>
+		<div class="header" id="header-description">Description <img class="" data-direction="off" src="resources/caret-bottom.svg" alt="caret"></div>
+		<div class="header" id="header-category">Category <img class="" data-direction="off" src="resources/caret-bottom.svg" alt="caret"></div>
+		<div class="header" id="header-amount">Amount <img class="" data-direction="off" src="resources/caret-bottom.svg" alt="caret"></div>
 		<div class="header" id="header-icons">Actions</div>
 	</div>
 
@@ -68,47 +68,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="main.js"></script>
-<script>
-
-
-// ["date", "description", "category", "amount"].forEach(function () {
-	document.getElementById("header-amount").addEventListener("click", function() {
-	    var allHeaders = document.querySelectorAll(".header > img").forEach(header => header.className = []);
-		var caret = this.querySelector("img");
-		var direction = caret.getAttribute("data-direction");
-		console.log(direction);
-		switch (direction) {
-			case "off":
-			    console.log("amount sort is off, setting to desc..");
-			    caret.setAttribute("data-direction", "desc");
-			    caret.classList.add("direction-desc");
-				transactionList.sort(function (a, b) {
-					return (a.amount < b.amount) ? 1 : -1;
-				});
-				refreshTransactions();
-				break;
-			case "desc":
-				console.log("amount sort is desc, setting to asc..");
-				caret.setAttribute("data-direction", "asc");
-				caret.classList.add("direction-asc");
-				transactionList.sort(function (a, b) {
-					return (a.amount > b.amount) ? 1 : -1;
-				});
-				refreshTransactions();
-				break;
-			case "asc":
-				console.log("amount sort is asc, setting to desc..");
-				caret.setAttribute("data-direction", "desc");
-				caret.classList.add("direction-desc");
-				transactionList.sort(function (a, b) {
-					return (a.amount < b.amount) ? 1 : -1;
-				});
-				refreshTransactions();
-				break;
-		}
-	// })
-});
-
-</script>
 </body>
 </html>

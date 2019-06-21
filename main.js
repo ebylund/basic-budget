@@ -168,3 +168,37 @@ fetchTransactionsAndPopulateList()
     .then(function() {
         refreshTransactions();
     });
+
+["date", "description", "category", "amount"].forEach(column => {
+    document.getElementById(`header-${column}`).addEventListener("click", function() {
+        document.querySelectorAll(".header > img").forEach(header => header.className = []);
+        let caret = this.querySelector("img");
+        let direction = caret.getAttribute("data-direction");
+        switch (direction) {
+            case "off":
+                caret.setAttribute("data-direction", "desc");
+                caret.classList.add("direction-desc");
+                transactionList.sort(function (a, b) {
+                    return (a[column] < b[column]) ? 1 : -1;
+                });
+                refreshTransactions();
+                break;
+            case "desc":
+                caret.setAttribute("data-direction", "asc");
+                caret.classList.add("direction-asc");
+                transactionList.sort(function (a, b) {
+                    return (a[column] > b[column]) ? 1 : -1;
+                });
+                refreshTransactions();
+                break;
+            case "asc":
+                caret.setAttribute("data-direction", "desc");
+                caret.classList.add("direction-desc");
+                transactionList.sort(function (a, b) {
+                    return (a[column] < b[column]) ? 1 : -1;
+                });
+                refreshTransactions();
+                break;
+        }
+    })
+});
