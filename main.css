@@ -27,7 +27,7 @@
 .trans-input {
     height: 40px;
     border: none;
-    background-color: #DEF0FF;
+    background-color: #EFEFEF;
     padding: 0 7px;
 }
 
@@ -147,5 +147,23 @@
     border-right: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     border-left: 1px solid var(--border-color);
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    float: right;
+    margin-top: 15px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
 

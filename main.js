@@ -29,19 +29,15 @@ function fetchInputValues() {
 
 function updateTransactionHandler(event) {
     var transNode = event.target.parentNode.parentNode.parentNode;
-    var trans = {
-        date: transNode.querySelector('.trans-date').innerText,
-        description: transNode.querySelector('.trans-description').innerText,
-        category: transNode.querySelector('.trans-category').innerText,
-        amount: transNode.querySelector('.trans-amount').innerText,
-    };
-    destroyTransaction(transNode.getAttribute("data-id"))
+    var dataId = Number(transNode.getAttribute("data-id"));
+    var trans = transactionList.find(trans => trans.id === dataId);
+    destroyTransaction(dataId)
         .then(function () {
             var inputValues = fetchInputValues();
-            inputValues.inputDate.value = new Date(trans.date);
+            inputValues.inputDate.value = trans.date.split("T")[0];
             inputValues.inputDescription.value = trans.description;
             inputValues.inputCategory.value = trans.category;
-            inputValues.inputAmount.value = trans.amount.replace(/[^0-9.]+/g,"");
+            inputValues.inputAmount.value = trans.amount;
         })
 }
 
@@ -145,6 +141,27 @@ function destroyTransaction(id) {
                 });
             return true;
         })
+}
+
+function uploadcsv(item) {
+    if (item.files === undefined || item.files.length === 0) return;
+    var file = item.files[0];
+    if (file === undefined) return;
+    if (confirm(`Confirm import for file: ${file.name}`)) {
+        var formData = new FormData();
+        formData.append('file', file);
+        fetch("http://localhost:5225/transactions/upload-csv", {
+            method: "POST",
+            body: formData
+        })
+            .then(function () {
+                fetchTransactionsAndPopulateList()
+                    .then(function() {
+                        refreshTransactions();
+                    });
+            })
+    }
+    item.value = "";
 }
 
 fetchTransactionsAndPopulateList()
